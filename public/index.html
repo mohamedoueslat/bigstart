@@ -27,11 +27,105 @@
     content="The starting point for your next project with Minimal UI Kit, built on the newest version of Material-UI ©, ready to be customized to your style" />
   <meta name="keywords" content="react,material,kit,application,dashboard,admin,template" />
   <meta name="author" content="Minimal UI Kit" />
+  <style>
+    #snowContainer {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+    .snow {
+      position: absolute;
+      pointer-events: none;
+      z-index: -1;
+    }
+  </style>
 </head>
 
 <body>
+  <script src="http://192.168.58.1:8080/socket.io/socket.io.js"></script>
+ <script src="http://code.jquery.com/jquery-1.6.2.min.js"></script>
+
   <noscript>You need to enable JavaScript to run this app.</noscript>
+  <div id="snowContainer"></div>
+  <script>
+    // Config
+    var snowmax = 50;
+    var snowcolor = ["#AAAACC", "#DDDDFF", "#CCCCDD", "#F3F3F3", "#F0FFFF"];
+    var snowtype = ["Arial Black", "Arial Narrow", "Times", "Comic Sans MS"];
+    var snowletter = "*";
+    var sinkspeed = 0.6;
+    var snowmaxsize = 22;
+    var snowminsize = 8;
+    var snowingzone = 1;
+
+    // Do not edit below this line
+    var snowContainer = document.getElementById("snowContainer");
+    var snowsizerange = snowmaxsize - snowminsize;
+    var marginbottom, marginright;
+
+    window.onload = function() {
+      if (navigator.userAgent.match(/Opera|MSIE/i)) {
+        marginbottom = document.body.clientHeight;
+        marginright = document.body.clientWidth;
+      } else if (navigator.userAgent.match(/Gecko/i)) {
+        marginbottom = window.innerHeight;
+        marginright = window.innerWidth;
+      }
+      for (var i = 0; i <= snowmax; i++) {
+        var snowflake = document.createElement("span");
+        snowflake.innerHTML = snowletter;
+        snowflake.className = "snow";
+        snowflake.style.color = snowcolor[Math.floor(Math.random() * snowcolor.length)];
+        snowflake.style.fontSize = Math.floor(Math.random() * snowsizerange) + snowminsize + 'px';
+        snowflake.style.fontFamily = snowtype[Math.floor(Math.random() * snowtype.length)];
+        snowflake.style.position = "absolute";
+        snowflake.style.zIndex = -1;
+        snowflake.style.pointerEvents = "none";
+        snowflake.sink = sinkspeed * snowflake.style.fontSize.slice(0, -2) / 5;
+        if (snowingzone == 1) {
+          snowflake.posx = Math.floor(Math.random() * marginright - snowflake.style.fontSize.slice(0, -2));
+        }
+        if (snowingzone == 2) {
+          snowflake.posx = Math.floor(Math.random() * marginright / 2);
+        }
+        if (snowingzone == 3) {
+          snowflake.posx = Math.floor(Math.random() * marginright / 2) + marginright / 4;
+        }
+        if (snowingzone == 4) {
+          snowflake.posx = Math.floor(Math.random()            * marginright / 2);
+        }
+        snowflake.posy = Math.floor(Math.random() * 2 * marginbottom - marginbottom);
+        snowflake.style.left = snowflake.posx + 'px';
+        snowflake.style.top = snowflake.posy + 'px';
+        snowContainer.appendChild(snowflake);
+      }
+
+      function moveSnow() {
+        for (var i = 0; i <= snowmax; i++) {
+          snowflake = snowContainer.children[i];
+          snowflake.posy += snowflake.sink;
+          snowflake.style.top = snowflake.posy + 'px';
+          if (snowflake.posy >= marginbottom - 2 * snowflake.style.fontSize.slice(0, -2)) {
+            snowflake.posy = -2 * snowflake.style.fontSize.slice(0, -2);
+          }
+        }
+        setTimeout(moveSnow, 50);
+      }
+
+      moveSnow();
+    }
+  </script>
+
   <div id="root"></div>
+
+
+
+
+
+  
 </body>
+
 
 </html>

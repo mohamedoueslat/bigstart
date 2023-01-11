@@ -3,24 +3,29 @@ import { sample } from 'lodash';
 
 // ----------------------------------------------------------------------
 
-const users = [...Array(24)].map((_, index) => ({
+const users = [...Array(10)].map((_, index) => ({
   id: faker.datatype.uuid(),
   avatarUrl: `/assets/images/avatars/avatar_${index + 1}.jpg`,
-  name: faker.name.fullName(),
-  company: faker.company.name(),
-  isVerified: faker.datatype.boolean(),
-  status: sample(['active', 'banned']),
+  name:faker.name.fullName(),
+  company:  sample([
+    "11'th grade math book",
+    'novel by cooleen hoover',
+    'french book C1',
+    "physics book 9'th grade",
+    "backpack (pink)",
+    "arabic book first year",
+    "spanish book A2"
+
+  ]),
+  status: sample(['delivered', 'in progress']),
   role: sample([
-    'Leader',
-    'Hr Manager',
-    'UI Designer',
-    'UX Designer',
-    'UI/UX Designer',
-    'Project Manager',
-    'Backend Developer',
-    'Full Stack Designer',
-    'Front End Developer',
-    'Full Stack Developer',
+    '1',
+    '2',
+    '4',
+    '3',
+    '5',
+    '6',
+    '7'
   ]),
 }));
 
