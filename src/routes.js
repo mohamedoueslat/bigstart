@@ -8,6 +8,8 @@ import UserPage from './pages/UserPage';
 import LoginPage from './pages/LoginPage';
 import Page404 from './pages/Page404';
 import ProductsPage from './pages/ProductsPage';
+import ProfilePage from './pages/ProfilePage';
+
 
 // ----------------------------------------------------------------------
 
@@ -17,10 +19,12 @@ export default function Router() {
       path: '/dashboard',
       element: <DashboardLayout />,
       children: [
-        { element: <Navigate to="/dashboard/user" />, index: true },
-        { path: 'user', element: <UserPage /> },
-        { path: 'products', element: <ProductsPage /> },
+        { element: <Navigate to="/dashboard/requests" />, index: true },
+        { path: 'requests', element: <UserPage /> },
+        { path: 'library', element: <ProductsPage /> },
         { path: 'blog', element: <BlogPage /> },
+        { path: 'profile', element: <ProfilePage /> },
+
       ],
     },
     {

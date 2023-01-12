@@ -148,7 +148,7 @@ export default function UserPage() {
   return (
     <>
       <Helmet>
-        <title> User | Minimal UI </title>
+        <title> Requests | Minimal UI </title>
       </Helmet>
 
       <Container>
