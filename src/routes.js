@@ -9,6 +9,8 @@ import LoginPage from './pages/LoginPage';
 import Page404 from './pages/Page404';
 import ProductsPage from './pages/ProductsPage';
 import ProfilePage from './pages/ProfilePage';
+import SavedPage from './pages/SavedPage';
+
 
 
 // ----------------------------------------------------------------------
@@ -19,11 +21,13 @@ export default function Router() {
       path: '/dashboard',
       element: <DashboardLayout />,
       children: [
-        { element: <Navigate to="/dashboard/requests" />, index: true },
+        { element: <Navigate to="/dashboard/liverooms" />, index: true },
+        { path: 'liverooms', element: <BlogPage /> },
         { path: 'requests', element: <UserPage /> },
         { path: 'library', element: <ProductsPage /> },
-        { path: 'blog', element: <BlogPage /> },
         { path: 'profile', element: <ProfilePage /> },
+        { path: 'saved', element: <SavedPage /> },
+
 
       ],
     },
